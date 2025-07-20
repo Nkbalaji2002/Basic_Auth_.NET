@@ -1,0 +1,5 @@
+.git
+.idea
+backend/bin
+backend/obj
+.env
