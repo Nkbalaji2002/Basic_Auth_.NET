@@ -16,7 +16,7 @@ public class PasswordHasher
 
     public static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
     {
-        using var hmac = new HMACSHA512();
+        using var hmac = new HMACSHA512(storedSalt);
         byte[] passwordBytes = Encoding.UTF8.GetBytes(password);
         byte[] computedHash = hmac.ComputeHash(passwordBytes);
         bool hashesMatch = computedHash.SequenceEqual(storedHash);
