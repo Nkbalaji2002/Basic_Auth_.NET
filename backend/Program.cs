@@ -1,11 +1,23 @@
+using backend.Data;
+using DotNetEnv;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+/* Load .env file */
+Env.Load();
 
+// Add services to the container.
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+/* DBContext for User */
+var connectionString = Environment.GetEnvironmentVariable("DB_CONNECTION");
+
+builder.Services.AddDbContext<UserDbContext>(options =>
+    options.UseMySql(connectionString, ServerVersion.AutoDetect(connectionString)));
 
 var app = builder.Build();
 
