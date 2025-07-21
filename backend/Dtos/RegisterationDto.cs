@@ -22,6 +22,8 @@ public class RegisterationDto
     [Required(ErrorMessage = "Password is required.")]
     [StringLength(100, ErrorMessage = "Password must be between 8 and 100 characters.", MinimumLength = 8)]
     [DataType(DataType.Password)]
-    [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&]).[8,]$")]
+    [RegularExpression(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&]).{8,}$",
+        ErrorMessage =
+            "Password must be at least 8 characters long and include uppercase, lowercase, number and special character.")]
     public required string Password { get; set; }
 }
