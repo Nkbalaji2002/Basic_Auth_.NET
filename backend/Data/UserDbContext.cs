@@ -22,7 +22,7 @@ public class UserDbContext(DbContextOptions options) : DbContext(options)
                 Id = 2,
                 FullName = "John Doe",
                 Email = "john.doe@example.com",
-                PasswordHash = PasswordHasherTwo.HashPassword("Pranaya@123"),
+                PasswordHash = PasswordHasherTwo.HashPassword("John@123"),
                 Role = "Administrator",
             },
             new UserTwo
