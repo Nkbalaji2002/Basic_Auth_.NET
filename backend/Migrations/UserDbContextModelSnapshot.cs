@@ -21,6 +21,61 @@ namespace backend.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
+            modelBuilder.Entity("backend.Models.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(150)
+                        .HasColumnType("varchar(150)");
+
+                    b.Property<decimal>("Price")
+                        .HasColumnType("decimal(12,2");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Description = "High performance laptop",
+                            Name = "Laptop",
+                            Price = 1200.00m,
+                            Stock = 15
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Description = "Ergonomic wireless mouse",
+                            Name = "Wireless Mouse",
+                            Price = 25.99m,
+                            Stock = 100
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Description = "RGB backlight mechanical keyboard",
+                            Name = "Mechanical Keyboard",
+                            Price = 79.99m,
+                            Stock = 45
+                        });
+                });
+
             modelBuilder.Entity("backend.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -58,6 +113,66 @@ namespace backend.Migrations
                         .IsUnique();
 
                     b.ToTable("my_users");
+                });
+
+            modelBuilder.Entity("backend.Models.UserTwo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<string>("PasswordHash")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar(50)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Email" }, "Index_Email_Unique")
+                        .IsUnique();
+
+                    b.ToTable("my_users_2");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Email = "pranaya.rout@example.com",
+                            FullName = "Pranaya Rout",
+                            PasswordHash = "ayRIdQoJLhXyufbY11KD1fXqmpf4aHDEXLWsdYmLZek=",
+                            Role = "Administrator,Manager"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Email = "john.doe@example.com",
+                            FullName = "John Doe",
+                            PasswordHash = "ayRIdQoJLhXyufbY11KD1fXqmpf4aHDEXLWsdYmLZek=",
+                            Role = "Administrator"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Email = "jane.smith@example.com",
+                            FullName = "Jane Smith",
+                            PasswordHash = "sKmBLz4SePwSKvTys+H4Zs9IpVJ7uaVmTJfqWPV5OzE=",
+                            Role = "Manager"
+                        });
                 });
 #pragma warning restore 612, 618
         }

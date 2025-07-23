@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace backend.Services;
 
-public class ProductService(ApplicationDbContext context) : IProductService
+public class ProductService(UserDbContext context) : IProductService
 {
     /* Mapping Product -> ProductDto */
     private static ProductResponseDto MapToDto(Product product)
